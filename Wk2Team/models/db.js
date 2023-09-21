@@ -1,20 +1,33 @@
-const mongoose = require('mongoose');
+const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
-// .env variables
-const mongoUsername = process.env.MONGO_USERNAME;
-const mongoPassword = process.env.MONGO_PASSWORD;
-const mongoURI = `mongodb://${mongoUsername}:${mongoPassword}@localhost:27017/your-database-name`;
+// MongoDB connection string
+const uri = process.env.MONGODB_URI;
 
-// Connect to MongoDB
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => {
+// Create a new MongoClient
+const client = new MongoClient(uri, { useUnifiedTopology: true });
+
+// Function to connect
+async function connectDb() {
+    try {
+        await client.connect();
         console.log('Connected to MongoDB');
-    })
-    .catch((err) => {
-        console.error('Error connecting to MongoDB:', err);
-    });
+        const db = client.db("cse341");
+        const collection = db.collection('wk2team');
+        const user = await collection.find({}).toArray();
+        await client.close();
+        console.log("Closed MongoDB Connection")
+        const data = user[0].user
+        return data;
+    } catch (error) {
+        console.error('Error connecting to MongoDB:', error);
+        throw error;
+    }
+}
 
-// Define Mongoose models here
 
-module.exports = mongoose.connection; // Export the connection object
+
+module.exports = {
+    connectDb
+};
+
