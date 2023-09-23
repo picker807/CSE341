@@ -2,8 +2,10 @@
 GET http://localhost:3000/contacts
 
 ### localhost single contact
-GET http://localhost:3000/contacts/650e20fd4b45f0fdf61b5972
+GET http://localhost:3000/contacts/650f08224b575470917e4371
 
 ### render all contacts
+GET https://three41-web-server.onrender.com/contacts
 
-### render singel contact
+### render single contact
+GET https://three41-web-server.onrender.com/contacts/650f08224b575470917e4371
