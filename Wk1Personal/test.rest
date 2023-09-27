@@ -26,6 +26,31 @@ Content-Type: application/json
 // copy/past the "insertedId" result from the POST request
 DELETE http://localhost:3000/contacts/6512342e4163c5e95ea85742
 
+### Render POST a new contact
+POST https://three41-web-server.onrender.com/contacts/new
+Content-Type: application/json
+
+{
+  "firstName": "Bobby",
+  "lastName": "McGee",
+  "email": "ILoveJanice@mcgeemail.com",
+  "favoriteColor": "Blue",
+  "birthday": "1950-05-20"
+}
+
+### Render PUT - change data by ID
+PUT https://three41-web-server.onrender.com/contacts/6513811a409364533e18d409
+Content-Type: application/json
+
+{
+  "firstName": "Bubba",
+  "lastName": "Gump",
+  "favoriteColor": "Beige"
+
+}
+
+### Render DELETE
+DELETE https://three41-web-server.onrender.com/contacts/6513811a409364533e18d409
 
 ### localhost all contacts
 GET http://localhost:3000/contacts
@@ -33,9 +58,9 @@ GET http://localhost:3000/contacts
 ### localhost single contact
 GET http://localhost:3000/contacts/650f08224b575470917e4371
 
-### render all contacts
+### Render all contacts
 GET https://three41-web-server.onrender.com/contacts
 
-### render single contact
+### Render single contact
 GET https://three41-web-server.onrender.com/contacts/650f08224b575470917e4371
 
