@@ -1,3 +1,32 @@
+### POST local host - creates a new contact
+POST http://localhost:3000/contacts/new
+Content-Type: application/json
+
+{
+  "firstName": "Johnny",
+  "lastName": "Danger",
+  "email": "DangerIsMySurname@geemail.com",
+  "favoriteColor": "Blue",
+  "birthday": "1990-01-15"
+}
+
+### PUT local host - update an existing contact
+// copy/past the "insertedId" result from the POST request
+// You can update one field or many. Feel free to add other fields to update.
+PUT http://localhost:3000/contacts/6512342e4163c5e95ea85742
+Content-Type: application/json
+
+{
+  "firstName": "Jabba",
+  "lastName": "Dabba"
+
+}
+
+### DELETE local host - delete contact
+// copy/past the "insertedId" result from the POST request
+DELETE http://localhost:3000/contacts/6512342e4163c5e95ea85742
+
+
 ### localhost all contacts
 GET http://localhost:3000/contacts
 
@@ -9,3 +38,4 @@ GET https://three41-web-server.onrender.com/contacts
 
 ### render single contact
 GET https://three41-web-server.onrender.com/contacts/650f08224b575470917e4371
+
