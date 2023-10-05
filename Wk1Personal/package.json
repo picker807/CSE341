@@ -2,15 +2,18 @@
   "author": "",
   "dependencies": {
     "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-validator": "^7.0.1",
     "mongodb": "^6.1.0",
-    "prettier": "^3.0.3"
+    "prettier": "^3.0.3",
+    "swagger-ui-express": "^5.0.0"
   },
   "description": "Lesson 1 set up server",
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "swagger-autogen": "^2.23.6"
   },
   "engines": {
     "node": ">=16.20.1"
@@ -20,7 +23,8 @@
   "name": "lesson1",
   "scripts": {
     "start": "nodemon server.js",
-    "format": "prettier --write \"**/*.js\""
+    "format": "prettier --write \"**/*.js\"",
+    "swagger-autogen": "node ./swagger.js"
   },
   "prettier": {
     "bracketSpacing": true,
