@@ -64,13 +64,13 @@ async function addNewContact(req, res) {
 	#swagger.tags = ['Contacts']
 	#swagger.summary = 'Create a new contact'
 	#swagger.description = 'Add a new contact with info provided by user'
-	#swagger.responses[200] = { description: 'New contact info', schema: { $ref: "#/components/schemas/Contact" } }
+	
 	#swagger.parameters['body'] = {
 	in: 'body',
 	description: 'Contact information',
 	required: true, // Indicates that the request body (Contact schema) is required
-	schema: { $ref: "#/components/schemas/Contact" }
-	 }
+	schema: { $ref: "#/components/schemas/Contact" }}
+	#swagger.responses[201] = { description: 'New contact info', schema: { $ref: "#/components/schemas/Contact" } }
 	*/
 	try {
 		const { firstName, lastName, email, favoriteColor, birthday } = req.body;

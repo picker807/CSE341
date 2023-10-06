@@ -82,25 +82,38 @@
             "schema": {
               "type": "object",
               "properties": {
-                "description": {
-                  "example": "any"
+                "firstName": {
+                  "type": "string",
+                  "example": "Moses"
                 },
-                "schema": {
-                  "example": "any"
+                "lastName": {
+                  "type": "string",
+                  "example": "Martin"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "Mmmartin@example.com" 
+                },
+                "favoriteColor": {
+                  "type": "string",
+                  "example": "green" 
+                },
+                "birthday": {
+                  "type": "string",
+                  "format": "date",
+                  "example": "10/06/2002"
                 }
               }
             }
           }
+          
         ],
         "responses": {
-          "200": {
-            "description": "New contact info",
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/components/schemas/Contact"
             }
-          },
-          "201": {
-            "description": "Created"
           },
           "500": {
             "description": "Internal Server Error"
@@ -121,6 +134,36 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "example": "Moses"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Martin"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "Mmmartin@example.com"
+                },
+                "favoriteColor": {
+                  "type": "string",
+                  "example": "green"
+                },
+                "birthday": {
+                  "type": "string",
+                  "format": "date",
+                  "example": "10/06/2002"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -162,14 +205,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Does not return any data",
-            "schema": {
-              "$ref": "#/components/schemas/Contact"
-            }
-          },
           "204": {
-            "description": "No Content"
+            "description": "Updated. No data returned"
           },
           "404": {
             "description": "Not Found"
@@ -195,7 +232,7 @@
         ],
         "responses": {
           "200": {
-            "description": "returns number of items deleted"
+            "description": "OK. returns number of items deleted"
           },
           "500": {
             "description": "Internal Server Error"
