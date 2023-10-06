@@ -74,13 +74,27 @@ const createContact = async (
 };
 
 //Function to update an existing contact by ID
-const updateContact = async (id, updatedData) => {
+const updateContact = async(
+	id,
+	firstName,
+	lastName,
+	email,
+	favoriteColor,
+	birthday,
+) => {
 	try {
+		const updateFields = {
+			firstName,
+			lastName,
+			email,
+			favoriteColor,
+			birthday,
+		};
 		const objectId = new ObjectId(id);
 
 		const result = await collection.findOneAndUpdate(
 			{ _id: objectId },
-			{ $set: updatedData },
+			{ $set: updateFields },
 			{ returnOriginal: false },
 		);
 		console.log(result);

@@ -60,8 +60,9 @@ async function addNewContact(req, res) {
 async function updateContactById(req, res) {
 	try {
 		const { id } = req.params;
-		const updatedData = req.body;
-		const updatedContact = await updateContact(id, updatedData);
+		const { firstName, lastName, email, favoriteColor, birthday } = req.body;
+
+		const updatedContact = await updateContact(id, firstName, lastName, email, favoriteColor, birthday);
 		console.log("updatedContact: ", updatedContact);
 		// return status 404 if contact not found
 		if (!updatedContact) {

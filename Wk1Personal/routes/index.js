@@ -12,7 +12,7 @@ const routes = require("express").Router();
  *         lastName:
  *           type: string
  *         email:
- *           type: string
+ *           type: string 
  *         favoriteColor:
  *           type: string
  *         birthday:
