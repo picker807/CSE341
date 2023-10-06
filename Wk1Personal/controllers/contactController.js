@@ -9,6 +9,18 @@ const {
 
 // GET to get all contacts
 async function handleAllContacts(req, res) { 
+	/**
+	 * #swagger.tags = ['Contacts']
+	 * #swagger.summary = 'Get all contacts'
+	 * #swagger.description = 'Retrieve a list of all contacts.'
+	 * #swagger.responses[200] = {
+	 *    description: 'List of contacts',
+	 *    schema: {
+	 *      $ref: '#/components/schemas/Contact'
+	 *    }
+	 * }
+	 * #swagger.responses[500] = { description: 'Internal Server Error' }
+	 */
 	try {
 		const data = await queryAllContacts();
 
@@ -22,6 +34,18 @@ async function handleAllContacts(req, res) {
 
 // GET to get a contact by ID
 async function handleSingleContact(req, res) {
+	/**
+	 * #swagger.tags = ['Contacts']
+	 * #swagger.summary = 'Get one contact by ID'
+	 * #swagger.description = 'Retrieve the contact associated with the ID provided.'
+	 * #swagger.responses[200] = {
+	 *    description: 'Single contact',
+	 *    schema: {
+	 *      $ref: '#/components/schemas/Contact'
+	 *    }
+	 * }
+	 * #swagger.responses[500] = { description: 'Internal Server Error' }
+	 */
 	try {
 		const id = req.params.id;
 		const data = await querySingleContact(id);
@@ -36,6 +60,18 @@ async function handleSingleContact(req, res) {
 
 //POST a new contact to the db
 async function addNewContact(req, res) {
+	/*
+	#swagger.tags = ['Contacts']
+	#swagger.summary = 'Create a new contact'
+	#swagger.description = 'Add a new contact with info provided by user'
+	#swagger.responses[200] = { description: 'New contact info', schema: { $ref: "#/components/schemas/Contact" } }
+	#swagger.parameters['body'] = {
+	in: 'body',
+	description: 'Contact information',
+	required: true, // Indicates that the request body (Contact schema) is required
+	schema: { $ref: "#/components/schemas/Contact" }
+	 }
+	*/
 	try {
 		const { firstName, lastName, email, favoriteColor, birthday } = req.body;
 
@@ -59,6 +95,18 @@ async function addNewContact(req, res) {
 
 // PUT to update a contact
 async function updateContactById(req, res) {
+	/*
+	#swagger.tags = ['Contacts']
+	#swagger.summary = 'Update one contact based on ID'
+	#swagger.description = 'Update the contact matching the ID provided'
+	#swagger.responses[200] = { description: 'Does not return any data', schema: { $ref: "#/components/schemas/Contact" } }
+	#swagger.parameters['body'] = {
+	in: 'body',
+	description: 'information to be updated',
+	required: true, // Indicates that the request body (Contact schema) is required
+	schema: { $ref: "#/components/schemas/Contact" }
+	}
+	*/
 	try {
 		const { id } = req.params;
 		const { firstName, lastName, email, favoriteColor, birthday } = req.body;
@@ -79,6 +127,12 @@ async function updateContactById(req, res) {
 
 // DELETE to delete a contact by ID
 async function deleteContact(req, res) {
+	/*
+	#swagger.tags = ['Contacts']
+	#swagger.summary = 'Delete one contact'
+	#swagger.description = 'Permanantly delete one contact associated with the ID provided'
+	#swagger.responses[200] = { description: 'returns number of items deleted'}
+	*/
 	try {
 		const { id } = req.params;
 		const result = await deleteContactById(id);

@@ -10,37 +10,6 @@
   "schemes": [
     "https"
   ],
-  "components": {
-    "schemas": {
-      "Contact": {
-        "type": "object",
-        "properties": {
-          "firstName": {
-            "type": "string",
-            "description": "The first name of the contact."
-          },
-          "lastName": {
-            "type": "string",
-            "description": "The last name of the contact."
-          },
-          "email": {
-            "type": "string",
-            "description": "The email address of the contact."
-          },
-          "favoriteColor": {
-            "type": "string",
-            "description": "The favorite color of the contact."
-          },
-          "birthday": {
-            "type": "string",
-            "format": "date",
-            "description": "The birthday of the contact (in the format mm/dd/yyyy)."
-          }
-        }
-      }
-    }
-  },
-
   "paths": {
     "/": {
       "get": {
@@ -69,7 +38,11 @@
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Create a new contact",
+        "description": "Add a new contact with info provided by user",
         "parameters": [
           {
             "name": "body",
@@ -77,19 +50,10 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
+                "description": {
                   "example": "any"
                 },
-                "lastName": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "favoriteColor": {
-                  "example": "any"
-                },
-                "birthday": {
+                "schema": {
                   "example": "any"
                 }
               }
@@ -97,6 +61,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "New contact info",
+            "schema": {
+              "$ref": "#/components/schemas/Contact"
+            }
+          },
           "201": {
             "description": "Created"
           },
@@ -108,7 +78,11 @@
     },
     "/contacts/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Get one contact by ID",
+        "description": "Retrieve the contact associated with the ID provided.",
         "parameters": [
           {
             "name": "id",
@@ -127,7 +101,11 @@
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Update one contact based on ID",
+        "description": "Update the contact matching the ID provided",
         "parameters": [
           {
             "name": "id",
@@ -141,19 +119,10 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
+                "description": {
                   "example": "any"
                 },
-                "lastName": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "favoriteColor": {
-                  "example": "any"
-                },
-                "birthday": {
+                "schema": {
                   "example": "any"
                 }
               }
@@ -161,6 +130,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Does not return any data",
+            "schema": {
+              "$ref": "#/components/schemas/Contact"
+            }
+          },
           "204": {
             "description": "No Content"
           },
@@ -173,7 +148,11 @@
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Delete one contact",
+        "description": "Permanantly delete one contact associated with the ID provided",
         "parameters": [
           {
             "name": "id",
@@ -184,7 +163,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "returns number of items deleted"
           },
           "500": {
             "description": "Internal Server Error"
