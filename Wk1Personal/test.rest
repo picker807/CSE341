@@ -13,12 +13,15 @@ Content-Type: application/json
 ### PUT local host - update an existing contact
 // copy/past the "insertedId" result from the POST request
 // You can update one field or many. Feel free to add other fields to update.
-PUT http://localhost:3000/contacts/6518322a84b3fdd56308ee50
+PUT http://localhost:3000/contacts/651f679f43be04d9c9ff1f43
 Content-Type: application/json
 
 {
   "firstName": "Jabba",
-  "lastName": "Dabba"
+  "lastName": "Dabba",
+  "email": "thisismyemail@email.com",
+  "favoriteColor": "this color",
+  "birthday": "10/03/2000"
 
 }
 

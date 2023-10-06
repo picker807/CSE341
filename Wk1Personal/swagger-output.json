@@ -10,6 +10,37 @@
   "schemes": [
     "https"
   ],
+  "components": {
+    "schemas": {
+      "Contact": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "The first name of the contact."
+          },
+          "lastName": {
+            "type": "string",
+            "description": "The last name of the contact."
+          },
+          "email": {
+            "type": "string",
+            "description": "The email address of the contact."
+          },
+          "favoriteColor": {
+            "type": "string",
+            "description": "The favorite color of the contact."
+          },
+          "birthday": {
+            "type": "string",
+            "format": "date",
+            "description": "The birthday of the contact (in the format mm/dd/yyyy)."
+          }
+        }
+      }
+    }
+  },
+
   "paths": {
     "/": {
       "get": {
@@ -23,7 +54,11 @@
     },
     "/contacts": {
       "get": {
-        "description": "",
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Get all contacts",
+        "description": "Retrieve a list of all contacts.",
         "responses": {
           "200": {
             "description": "OK"

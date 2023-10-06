@@ -4,10 +4,11 @@ const {
 	createContact,
 	updateContact,
 	deleteContactById,
+	Contact
 } = require("../models/contactModel.js");
 
 // GET to get all contacts
-async function handleAllContacts(req, res) {
+async function handleAllContacts(req, res) { 
 	try {
 		const data = await queryAllContacts();
 
