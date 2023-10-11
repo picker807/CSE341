@@ -1,0 +1,230 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "My CSE341 API",
+    "description": "Contacts API for CSE341",
+    "version": "1.0.0"
+  },
+  "host": "three41-web-server.onrender.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "components": {
+    "schemas": {
+      "Contact": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "The first name of the contact."
+          },
+          "lastName": {
+            "type": "string",
+            "description": "The last name of the contact."
+          },
+          "email": {
+            "type": "string",
+            "description": "The email address of the contact."
+          },
+          "favoriteColor": {
+            "type": "string",
+            "description": "The favorite color of the contact."
+          },
+          "birthday": {
+            "type": "string",
+            "format": "date",
+            "description": "The birthday of the contact (in the format mm/dd/yyyy)."
+          }
+        },
+        "required": [ "firstName", "lastName", "email" ]
+      }
+    }
+  },
+
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/contacts": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Get all contacts",
+        "description": "Retrieve a list of all contacts.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Create a new contact",
+        "description": "Add a new contact with info provided by user",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "example": "Moses"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Martin"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "Mmmartin@example.com" 
+                },
+                "favoriteColor": {
+                  "type": "string",
+                  "example": "green" 
+                },
+                "birthday": {
+                  "type": "string",
+                  "format": "date",
+                  "example": "10/06/2002"
+                }
+              }
+            }
+          }
+          
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/components/schemas/Contact"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/contacts/{id}": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Get one contact by ID",
+        "description": "Retrieve the contact associated with the ID provided.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Update one contact based on ID",
+        "description": "Update the contact matching the ID provided",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "example": "Moses"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Martin"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "Mmmartin@example.com"
+                },
+                "favoriteColor": {
+                  "type": "string",
+                  "example": "green"
+                },
+                "birthday": {
+                  "type": "string",
+                  "format": "date",
+                  "example": "10/06/2002"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Updated. No data returned"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Delete one contact",
+        "description": "Permanantly delete one contact associated with the ID provided",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. returns number of items deleted"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}

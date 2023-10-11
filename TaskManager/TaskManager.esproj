@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/0.5.94-alpha">
+  <ItemGroup>
+    <Folder Include="controllers\" />
+    <Folder Include="models\" />
+    <Folder Include="routes\" />
+  </ItemGroup>
+</Project>

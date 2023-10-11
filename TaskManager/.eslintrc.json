@@ -1,0 +1,10 @@
+/*{
+  "root": true,
+  "rules": {
+    // Disable the "no-const-assign" rule to allow "const" assignments
+    "no-const-assign": "off",
+
+    // Enable the "no-duplicate-imports" rule to catch duplicate import statements
+    "no-duplicate-imports": "error"
+  }
+}*/
