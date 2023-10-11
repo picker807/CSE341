@@ -26,4 +26,22 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+module.exports = {
+    createUserQuery: (userData) => {
+        const newUser = new User(userData);
+        await newUser.save();
+        return newUser;
+    },
+    getAllUsersQuery: () => {
+        // Implement logic to retrieve all users
+    },
+    getUserByIdQuery: (userId) => {
+        // Implement logic to retrieve a user by ID
+    },
+    updateUserQuery: (userId, userData) => {
+        // Implement logic to update a user
+    },
+    deleteUserQuery: (userId) => {
+        // Implement logic to delete a user
+    }
+};
