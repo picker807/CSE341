@@ -3,9 +3,9 @@ POST http://localhost:3030/users
 Content-Type: application/json
 
 {
-  "username": "Blobber",
-   "fullName": "Bobby Rains",
-   "email": "BobBlobber@geemail.com",
+  "username": "Kerplunk",
+   "fullName": "Rob perkins",
+   "email": "thisemail@geemail.com",
    "password": "thisPassword",
    "tasksAssigned": []
 }
@@ -18,12 +18,12 @@ POST https://task-manager-hc4o.onrender.com/users
 Content-Type: application/json
 
 {
-  "username": "Blobber",
-   "fullName": "Bobby Rains",
-   "email": "BobBlobber@geemail.com",
+  "username": "Fuzzy Bunny Slippers",
+   "fullName": "Jan Gilbert",
+   "email": "fuzzyBunny@geemail.com",
    "password": "thisPassword",
    "tasksAssigned": []
 }
 
 ### GET all users on Render
-https://task-manager-hc4o.onrender.com/users
+GET https://task-manager-hc4o.onrender.com/users

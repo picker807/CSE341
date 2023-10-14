@@ -5,10 +5,10 @@
     "description": "Track tasks in a group. Keep up on due dates and collaborate.",
     "version": "1.0.0"
   },
-  "host": "localhost:3030",
+  "host": "task-manager-hc4o.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/users": {
@@ -181,24 +181,24 @@
   },
   "definitions": {
     "User": {
-        "type": "object",
-        "properties": {
-          "username": {
-            "type": "string"
-          },
-          "fullName": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          },
-          "tasksAssigned": {
-            "type":  "string"
-          }
-        }
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "tasksAssigned": {
+          "type": "string"
         }
       }
     }
+  }
+}
