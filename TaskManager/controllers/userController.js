@@ -1,90 +1,86 @@
-const {
-    createUserQuery,
-    getAllUsersQuery,
-    getUserByIdQuery,
-    updateUserQuery,
-    deleteUserQuery } = require('../models/userModel');
+const db = require('../models');
+const User  = db.user;
 
 // Create a new user
 async function createUser(req, res) {
-    try {
-        const newUser = await createUserQuery(req.body);
-
-        if (newUser) {
-            res.status(201).json(newUser);
-        } else {
-            res.status(400).json({ error: 'Bad Request' });
-        }
-        
-    } catch (error) {
-        res.status(500).json({ error: 'User creation failed' });
-    }
+   
+    const user = new User(req.body);
+    user
+        .save()
+        .then((data) => {
+                res.status(201).send(data);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: err.message || 'An error occurred while creating the user.'
+            });
+        });
 }
 
 // Get all users
 async function getAllUsers(req, res) {
-    try {
-        const users = await getAllUsersQuery();
-
-        if (users) {
-            res.status(200).json(users); // 200 OK
-        } else {
-            res.status(404).json({ error: 'Not Found' }); // 404 Not Found
-        }
-        
-    } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-}
+  
+    User
+        .find({})
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: err.message || 'An error occurred while getting users.'
+            });
+        });
 }
 
 // Get a user by ID
-async function getUserById(req, res) {
-    try {
-        const user = await getUserByIdQuery(req.params.id);
-
-        if (user) {
-            return res.status(200).json(user); // 200 OK
-        } else {
-            return res.status(404).json({ error: 'Not Found' }); // 404 Not Found
-        }
-    } catch (error) {
-        return res.status(500).json({ error: 'Internal Server Error' }); // 500 Internal Server Error
-    }
+async function getUserByUsername(req, res) {
+    const username = req.params.username;
+    User
+        .find({ username: username })
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+             res.status(500).send({
+                 message: err.message || 'An error occurred while getting user.'
+             });
+        });
 }
-
+        
 // Update a user
 async function updateUser(req, res) {
-    try {
-        const updatedUser = await updateUserQuery(req.params.id, req.body);
-        if (updatedUser) {
-            return res.status(200).json(updatedUser); // 200 OK
-        } else {
-            return res.status(404).json({ error: 'Not Found' }); // 404 Not Found
-        }
-    } catch (error) {
-        return res.status(400).json({ error: 'Bad Request' }); // 400 Bad Request
-    }
+    const username = req.params.username;
+    User
+        .updateOne({username: username}, {$set: req.body})
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) =>{
+            res.status(500).send({
+            message: err.message || 'An error occurred while updating user info.'
+            });
+        });
 }
 
 // Delete a user
 async function deleteUser(req, res) {
-    try {
-        const result = await deleteUserQuery(req.params.id);
-        if (result.n === 1) {
-            return res.status(204).send(); // 204 No Content
-        } else {
-            return res.status(404).json({ error: 'Not Found' }); // 404 Not Found
-        }
-    } catch (error) {
-        return res.status(500).json({ error: 'Internal Server Error' }); // 500 Internal Server Error
-    }
+    const username = req.params.username;
+    User
+        .deleteOne({username: username})
+        .then((data) => {
+            res.send(data)
+        })
+        .catch ((err) => {
+            res.status(500).send({
+            message: err.message || 'An error occurred while updating user info.'
+            });
+        });
 }
 
 module.exports = {
     createUser,
     getAllUsers,
-    getUserById,
+    getUserByUsername,
     updateUser,
     deleteUser
 

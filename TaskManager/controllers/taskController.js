@@ -1,4 +1,4 @@
-const Task = require('../models/task');
+const Task = require('../models/taskModel');
 
 // Create a new user
 exports.createTask = (req, res) => {

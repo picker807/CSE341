@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 
 // Import your controllers
-const userController = require('./controllers/userController');
-const tasksController = require('./controllers/tasksController');
+const userController = require('../controllers/userController');
+const tasksController = require('../controllers/taskController');
 
 // Routes for the "User" collection
 router.post('/users', userController.createUser);
 router.get('/users', userController.getAllUsers);
-router.get('/users/:id', userController.getUserById);
+router.get('/users/:id', userController.getUserByUsername);
 router.put('/users/:id', userController.updateUser);
 router.delete('/users/:id', userController.deleteUser);
 

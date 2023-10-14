@@ -1,162 +1,192 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Your API",
-    "version": "1.0.0",
-    "description": "API documentation for your User and Task collections"
+    "title": "Task Manager",
+    "description": "Track tasks in a group. Keep up on due dates and collaborate.",
+    "version": "1.0.0"
   },
   "host": "localhost:3030",
-  "basePath": "/api-docs",
-  "schemes": [ "http" ],
-  
-    "paths": {
-      "/users": {
-        "get": {
-          "tags": [ "Users", "Completed" ],
-          "summary": "Get all users",
-          "responses": {
-            "200": {
-              "description": "Successful response"
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "description": "Create a new user",
+        "tags": [ "Ready" ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/User"
             }
+          },
+          "500": {
+            "description": "Server error"
+          },
+          "default": {
+            "description": ""
           }
         },
-        "post": {
-          "tags": [ "Users", "Completed" ],
-          "summary": "Create a new user",
-          "parameters": [
-            {
-              "name": "User",
-              "in": "body",
-              "schema": {
-                "$ref": "#/definitions/User"
-              }
-            }
-          ],
-          "responses": {
-            "201": {
-              "description": "User created successfully"
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "The user to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
             }
           }
-        }
+        ]
       },
-      "/users/{id}": {
-        "get": {
-          "tags": [ "Users", "In Progress" ],
-          "summary": "Get a user by ID",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "type": "string"
+      "get": {
+        "description": "Get all users",
+        "tags": [ "Ready" ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/User"
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response"
-            }
-          }
-        },
-        "put": {
-          "tags": [ "Users", "In Progress" ],
-          "summary": "Update a user by ID",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            },
-
-            {
-              "name": "User",
-              "in": "body",
-              "schema": {
-                "$ref": "#/definitions/User"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "User updated successfully"
-            }
-          }
-        },
-        "delete": {
-          "tags": [ "Users", "In Progress" ],
-          "summary": "Delete a user by ID",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "204": {
-              "description": "User deleted successfully"
-            }
-          }
-        }
-      },
-      "/tasks": {
-        "get": {
-          "tags": [ "Tasks", "In Progress" ],
-          "summary": "Get all tasks",
-          "responses": {
-            "200": {
-              "description": "Successful response"
-            }
-          }
-        },
-        "post": {
-          "tags": [ "Tasks", "In Progress" ],
-          "summary": "Create a new task",
-          "parameters": [
-            {
-              "name": "Task",
-              "in": "body",
-              "schema": {
-                "$ref": "#/definitions/Task"
-              }
-            }
-          ],
-          "responses": {
-            "201": {
-              "description": "Task created successfully"
-            }
-          }
-        }
-      },
-      "/tasks/{id}": {
-        "get": {
-          "tags": [ "Tasks", "In Progress" ],
-          "summary": "Get a task by ID",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response"
-            }
+          },
+          "500": {
+            "description": "Server error"
+          },
+          "default": {
+            "description": ""
           }
         }
       }
     },
-    "definitions": {
-      "User": {
+    "/users/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/tasks": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/tasks/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
         "type": "object",
         "properties": {
           "username": {
             "type": "string"
           },
-          "fullname": {
+          "fullName": {
             "type": "string"
           },
           "email": {
@@ -165,56 +195,10 @@
           "password": {
             "type": "string"
           },
-          "tasksassigned": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Task"
-            }
+          "tasksAssigned": {
+            "type":  "string"
           }
         }
-      },
-      "Task": {
-        "type": "object",
-        "properties": {
-          "taskname": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "duedate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "priority": {
-            "type": "string"
-          },
-          "assignedto": {
-            "$ref": "#/definitions/User"
-          },
-          "comments": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "text": {
-                  "type": "string"
-                },
-                "user": {
-                  "type": "string"
-                },
-                "timestamp": {
-                  "type": "string",
-                  "format": "date-time"
-                }
-              }
-            }
-          },
-          "status": {
-            "type": "string"
-          }
         }
       }
     }
-  }
-

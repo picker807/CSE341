@@ -1,0 +1,29 @@
+###Post in localhost:3030
+POST http://localhost:3030/users
+Content-Type: application/json
+
+{
+  "username": "Blobber",
+   "fullName": "Bobby Rains",
+   "email": "BobBlobber@geemail.com",
+   "password": "thisPassword",
+   "tasksAssigned": []
+}
+
+### GET all users in localhost:3030
+GET http://localhost:3030/users
+
+### POST in Render
+POST https://task-manager-hc4o.onrender.com/users
+Content-Type: application/json
+
+{
+  "username": "Blobber",
+   "fullName": "Bobby Rains",
+   "email": "BobBlobber@geemail.com",
+   "password": "thisPassword",
+   "tasksAssigned": []
+}
+
+### GET all users on Render
+https://task-manager-hc4o.onrender.com/users
