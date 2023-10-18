@@ -6,6 +6,7 @@ const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 const db = require('./models');
+const middleware = require("./middleware/middleware");
 
 app
     .use(cors())
@@ -14,8 +15,9 @@ app
     .use((req, res, next) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
         next();
-      })
-    .use("/", require("./routes"));
+    })
+    .use("/", require("./routes"))
+    .use(middleware.errorHandler);
 
 db.mongoose
     .connect(db.url, {

@@ -3,9 +3,9 @@ POST http://localhost:3030/users
 Content-Type: application/json
 
 {
-  "username": "Kerplunk",
+   "username": "Buggy",
    "fullName": "Rob perkins",
-   "email": "thisemail@geemail.com",
+   "email": "mail@gmail.com",
    "password": "thisPassword",
    "tasksAssigned": []
 }
@@ -13,12 +13,27 @@ Content-Type: application/json
 ### GET all users in localhost:3030
 GET http://localhost:3030/users
 
+### GET a user by ID
+GET http://localhost:3030/users/6525ff262a1e70b7324f68b4
+
+### PUT Change one user info by ID
+PUT http://localhost:3030/users/652ae8edf40a6053001668cf
+Content-Type: application/json
+
+{
+   "username": "Blurry",
+   "fullName": "Rob perkins",
+   "email": "mailryfn",
+   "password": "thisPassword",
+   "tasksAssigned": []
+}
+
 ### POST in Render
 POST https://task-manager-hc4o.onrender.com/users
 Content-Type: application/json
 
 {
-  "username": "Fuzzy Bunny Slippers",
+  "username": "Fuzzy Bunny Slinpm startppers",
    "fullName": "Jan Gilbert",
    "email": "fuzzyBunny@geemail.com",
    "password": "thisPassword",

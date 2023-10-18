@@ -5,22 +5,25 @@
     "description": "Track tasks in a group. Keep up on due dates and collaborate.",
     "version": "1.0.0"
   },
-  "host": "task-manager-hc4o.onrender.com",
+  "host": "localhost:3030",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/users": {
       "post": {
         "description": "Create a new user",
-        "tags": [ "Ready" ],
+        "tags": [ "Functional" ],
         "responses": {
           "201": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/User"
             }
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Server error"
@@ -43,13 +46,16 @@
       },
       "get": {
         "description": "Get all users",
-        "tags": [ "Ready" ],
+        "tags": [ "Functional" ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/User"
             }
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Server error"
@@ -62,7 +68,8 @@
     },
     "/users/{id}": {
       "get": {
-        "description": "",
+        "description": "Get a user by their ID",
+        "tags": [ "Functional" ],
         "parameters": [
           {
             "name": "id",
@@ -72,29 +79,59 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
           "default": {
             "description": ""
           }
         }
       },
       "put": {
-        "description": "",
+        "description": "Update a user with ID",
+        "tags": [ "Functional" ],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+
+          {
+            "in": "body",
+            "name": "user",
+            "description": "The user info to update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Server error"
+          },
           "default": {
             "description": ""
           }
         }
       },
       "delete": {
-        "description": "",
+        "description": "Delete a user by ID",
+        "tags": [ "Functional" ],
         "parameters": [
           {
             "name": "id",
@@ -104,6 +141,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success"
+          },
           "default": {
             "description": ""
           }
