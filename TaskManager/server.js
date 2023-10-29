@@ -7,8 +7,23 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 const db = require('./models');
 const middleware = require("./middleware/middleware");
+const passport = require('./config/passport');
+const session = require('express-session');
+const crypto = require('crypto');
+
+const secret = crypto.randomBytes(64).toString('hex');
 
 app
+    .use(session({
+    secret: secret,
+    resave: true,
+    saveUninitialized: true
+    }))
+
+    // Passport Initialization Middleware
+    .use(passport.initialize())
+    .use(passport.session())
+
     .use(cors())
     .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
     .use(bodyParser.json())
@@ -16,7 +31,20 @@ app
         res.setHeader('Access-Control-Allow-Origin', '*');
         next();
     })
-    .use("/", require("./routes"))
+    
+    .use("/users", middleware.ensureAuthenticated, require("./routes/users"))
+    .use("/tasks", middleware.ensureAuthenticated, require("./routes/tasks"))
+    .use("/auth", require("./routes/auth"))
+    // Local login route
+    /*.post('/login', passport.authenticate('local', {
+        successRedirect: '/', // Redirect on success
+        failureRedirect: '/', // Redirect on failure
+        failureFlash: true // Enable flash messages for login failures
+    }))
+    .get('/logout', (req, res) => {
+        req.logout();
+        res.redirect('/');
+    }) */
     .use(middleware.errorHandler);
 
 db.mongoose

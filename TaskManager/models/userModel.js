@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
+    githubId: {
+        type: String,
+        trim: true
+    },
     username: {
         type: String,
         trim: true,
@@ -9,7 +13,6 @@ const userSchema = new mongoose.Schema({
     fullName: {
         type: String,
         trim: true,
-        required: [true, 'Full name is required']
     },
     email: {
         type: String,
@@ -21,7 +24,9 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+        //I set password as not required due to the OAuth. 
+        // Ideally, the user could login using OAuth and then would be
+        // prompted to set a password on the front end.
     },
     tasksAssigned: [String]
 });

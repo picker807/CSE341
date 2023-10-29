@@ -5,40 +5,28 @@
     "description": "Track tasks in a group. Keep up on due dates and collaborate.",
     "version": "1.0.0"
   },
-  "host": "task-manager-hc4o.onrender.com",
+  "host": "localhost:3030",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/auth/github": {
-      "get": {
-        "description": "OAuth2 authentication with GitHub",
-        "tags": [ "Functional" ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "500": {
-            "description": "Internal error"
-          },
-          "default": {
-            "description": ""
+        "get": {
+          "description": "OAuth2 authentication with GitHub",
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "500": {
+              "description": "Internal error"
+            },
+            "default": {
+              "description": ""
+            }
           }
         }
-      }
-    },
-    "/auth/logout": {
-      "get": {
-        "description": "Logout user and delete session data",
-        "tags": [ "Functional" ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
+      },
     "/users": {
       "post": {
         "description": "Create a new user",
@@ -252,7 +240,7 @@
       "type": "object",
       "properties": {
         "githubId": {
-          "type": "string"
+          "type":  "string"
         },
         "username": {
           "type": "string"

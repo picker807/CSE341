@@ -1,11 +1,19 @@
+
+
+
+
+### OAuth Github
+GET http://localhost:3030/auth/github
+
+
 ###Post in localhost:3030
 POST http://localhost:3030/users
 Content-Type: application/json
 
 {
-   "username": "Buggy",
-   "fullName": "Rob perkins",
-   "email": "mail@gmail.com",
+   "username": "Slugger",
+   "fullName": " perkins",
+   "email": "baseballfan@gmail.com",
    "password": "thisPassword",
    "tasksAssigned": []
 }
@@ -17,14 +25,14 @@ GET http://localhost:3030/users
 GET http://localhost:3030/users/6525ff262a1e70b7324f68b4
 
 ### PUT Change one user info by ID
-PUT http://localhost:3030/users/652ae8edf40a6053001668cf
+PUT http://localhost:3030/users/65307c41fe857d4c058939be
 Content-Type: application/json
 
 {
-   "username": "Blurry",
-   "fullName": "Rob perkins",
-   "email": "mailryfn",
-   "password": "thisPassword",
+  "username": "Slugger",
+  "fullName": "perkins",
+  "email": "baseball@gmail.com",
+  "password": "thisPassword",
    "tasksAssigned": []
 }
 
