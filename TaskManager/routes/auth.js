@@ -24,9 +24,9 @@ router.get('/logout', (req, res) => {
     req.logout(function(err) {
         if(err) {
             console.error(err);
-            return res.redirect('/auth/github');
+            return res.redirect('/');
         }
-        res.redirect('/auth/github');
+        res.redirect('/');
     });
 }); 
 
