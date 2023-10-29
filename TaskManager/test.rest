@@ -1,8 +1,12 @@
 
 
+### Render OAuth Github
+GET https://task-manager-hc4o.onrender.com/auth/github
 
+### Render Logout
+GET https://task-manager-hc4o.onrender.com/auth/logout
 
-### OAuth Github
+### Localhost OAuth Github
 GET http://localhost:3030/auth/github
 
 
