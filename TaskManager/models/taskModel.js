@@ -15,15 +15,11 @@ const taskSchema = new mongoose.Schema({
         type: String,
     },
     assignedTo: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // Reference to the "User" model
+        type: Array
     },
     comments: [
         {
             text: {
-                type: String,
-            },
-            user: {
                 type: String,
             },
             timestamp: {

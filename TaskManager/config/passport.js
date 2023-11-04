@@ -16,7 +16,6 @@ passport.use(new GitHubStrategy({
     failureRedirect: '/auth/github'
 
 }, (accessToken, refreshToken, profile, done) => {
-    console.log("Look here  ", profile);
 
     const email = profile.emails && profile.emails.length > 0 ? profile.emails[0].value : null;
     const username = profile.username;

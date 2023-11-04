@@ -10,11 +10,23 @@
   "schemes": [
     "https"
   ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "authorizationUrl": "https://github.com/login/oauth/authorize",
+      "tokenUrl": "https://github.com/login/oauth/access_token",
+      "flow": "accessCode",
+      "scopes": {
+        "user:email": "Access user email",
+        "read:user": "Read user data"
+      }
+    }
+  },
   "paths": {
     "/auth/github": {
       "get": {
         "description": "OAuth2 authentication with GitHub",
-        "tags": [ "Functional" ],
+        "tags": [ "OAuth route" ],
         "responses": {
           "200": {
             "description": "Success"
@@ -31,7 +43,7 @@
     "/auth/logout": {
       "get": {
         "description": "Logout user and delete session data",
-        "tags": [ "Functional" ],
+        "tags": [ "OAuth route" ],
         "responses": {
           "default": {
             "description": ""
@@ -42,7 +54,8 @@
     "/users": {
       "post": {
         "description": "Create a new user",
-        "tags": [ "Functional" ],
+        "tags": [ "User route" ],
+        "security": [ { "OAuth2": [ "user:email", "read:user" ] } ],
         "responses": {
           "201": {
             "description": "Success",
@@ -74,7 +87,8 @@
       },
       "get": {
         "description": "Get all users",
-        "tags": [ "Functional" ],
+        "tags": [ "User route" ],
+        "security": [ { "OAuth2": [ "user:email", "read:user" ] } ],
         "responses": {
           "200": {
             "description": "Success",
@@ -97,7 +111,8 @@
     "/users/{id}": {
       "get": {
         "description": "Get a user by their ID",
-        "tags": [ "Functional" ],
+        "tags": [ "User route" ],
+        "security": [ { "OAuth2": [ "user:email", "read:user" ] } ],
         "parameters": [
           {
             "name": "id",
@@ -123,7 +138,8 @@
       },
       "put": {
         "description": "Update a user with ID",
-        "tags": [ "Functional" ],
+        "tags": [ "User route" ],
+        "security": [ { "OAuth2": [ "user:email", "read:user" ] } ],
         "parameters": [
           {
             "name": "id",
@@ -159,7 +175,8 @@
       },
       "delete": {
         "description": "Delete a user by ID",
-        "tags": [ "Functional" ],
+        "tags": [ "User route" ],
+        "security": [ { "OAuth2": [ "user:email", "read:user" ] } ],
         "parameters": [
           {
             "name": "id",
@@ -180,25 +197,63 @@
     },
     "/tasks": {
       "post": {
-        "description": "",
+        "description": "Create a new task",
+        "tags": [ "Task route" ],
+        "security": [ { "OAuth2": [ "user:email", "read:user" ] } ],
         "responses": {
+          "201": {
+            "description": "Task created successfully",
+            "schema": { "$ref": "#/definitions/Task" }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Server error"
+          },
           "default": {
-            "description": ""
+            "description": "Unknown error"
           }
-        }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "task",
+            "description": "The task to create",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Task" }
+          }
+        ]
       },
       "get": {
-        "description": "",
+        "description": "Get all tasks",
+        "tags": [ "Task route" ],
+        "security": [ { "OAuth2": [ "user:email", "read:user" ] } ],
         "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/Task" }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Server error"
+          },
           "default": {
-            "description": ""
+            "description": "Unknown error"
           }
         }
       }
     },
     "/tasks/{id}": {
       "get": {
-        "description": "",
+        "description": "Get a task by its ID",
+        "tags": [ "Task route" ],
+        "security": [ { "OAuth2": [ "user:email", "read:user" ] } ],
         "parameters": [
           {
             "name": "id",
@@ -208,29 +263,56 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/Task" }
+          },
+          "404": {
+            "description": "Task not found"
+          },
           "default": {
-            "description": ""
+            "description": "Unknown error"
           }
         }
       },
       "put": {
-        "description": "",
+        "description": "Update a task with ID",
+        "tags": [ "Task route" ],
+        "security": [ { "OAuth2": [ "user:email", "read:user" ] } ],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "task",
+            "description": "The task info to update",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Task" }
           }
         ],
         "responses": {
+          "204": {
+            "description": "Task updated successfully"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Server error"
+          },
           "default": {
-            "description": ""
+            "description": "Unknown error"
           }
         }
       },
       "delete": {
-        "description": "",
+        "description": "Delete a task by ID",
+        "tags": [ "Task route" ],
+        "security": [ { "OAuth2": [ "user:email", "read:user" ] } ],
         "parameters": [
           {
             "name": "id",
@@ -240,8 +322,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Task deleted successfully"
+          },
+          "404": {
+            "description": "Task not found"
+          },
           "default": {
-            "description": ""
+            "description": "Unknown error"
           }
         }
       }
@@ -269,6 +357,43 @@
         "tasksAssigned": {
           "type": "string"
         }
+      }
+    },
+    "Task": {
+      "type": "object",
+      "properties": {
+        "taskName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "dueDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "priority": {
+          "type": "string"
+        },
+        "assignedTo": {
+          "type": "array"
+        },
+        "comments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "timestamp": {
+                "type": "string",
+                "format": " date"
+              }
+            }
+          }
+        },
+        "status": { "type": "string" }
       }
     }
   }

@@ -17,7 +17,7 @@ async function createUser(req, res, next) {
                     message: err.message || 'An error occurred while creating the user.'
                 }); 
             } else {
-                next(error);
+                next(err);
             }
         });
 }
@@ -36,7 +36,7 @@ async function getAllUsers(req, res, next) {
                     message: err.message || 'An error occurred while updating the user.'
                 });
             } else {
-                next(error);
+                next(err);
             }
         });
 }
@@ -97,5 +97,4 @@ module.exports = {
     getUserById,
     updateUser,
     deleteUser
-
 }
