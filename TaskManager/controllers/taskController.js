@@ -74,7 +74,7 @@ async function updateTask (req, res, next)  {
 // Delete a task
 async function deleteTask(req, res) {
     const id = req.params.id;
-    User
+    Task
         .deleteOne({ _id: id})
         .then((data) => {
             res.send(data)
